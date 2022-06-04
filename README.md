@@ -1,6 +1,6 @@
 # Simulate Solar Orbit in Python
 
-The repo includes three implementation of simulation.
+The repo includes three implementations of simulation.
 
 1. File `solar_orbit_2d.py` plot the 2d orbit with Matplotlib
 ![solar_2d](/sample_gifs/solar_orbit_2d.gif)
