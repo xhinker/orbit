@@ -42,19 +42,20 @@ xmlist,ymlist,zmlist = [],[],[]
 xclist,yclist,zclist = [],[],[]
 
 # start simulation
-while t<5*600*daysec:
+while t<5*365*daysec:
     ################ earth #############
     # compute G force on earth
-    rx,ry,rz = xs - xe, ys - ye, zs - ze
+    #rx,ry,rz = xs - xe, ys - ye, zs - ze
+    rx,ry,rz = xe - xs, ye - ys, ze - zs
     modr3_e = (rx**2+ry**2+rz**2)**1.5
     fx_e = -gravconst_e*rx/modr3_e
     fy_e = -gravconst_e*ry/modr3_e
     fz_e = -gravconst_e*rz/modr3_e
     
     # update quantities how is this calculated?  F = ma -> a = F/m
-    xve += -fx_e*dt/Me
-    yve += -fy_e*dt/Me
-    zve += -fz_e*dt/Me
+    xve += fx_e*dt/Me
+    yve += fy_e*dt/Me
+    zve += fz_e*dt/Me
     
     # update position
     xe += xve*dt
@@ -68,19 +69,19 @@ while t<5*600*daysec:
     
     ################ Mars ##############
     # compute G force on mars
-    rx_m,ry_m,rz_m = xs - xm, ys - ym, zs - zm
+    rx_m,ry_m,rz_m = xm - xs, ym - ys, zm - zs
     modr3_m = (rx_m**2+ry_m**2+rz_m**2)**1.5
     fx_m = -gravconst_m*rx_m/modr3_m
     fy_m = -gravconst_m*ry_m/modr3_m
     fz_m = -gravconst_m*rz_m/modr3_m
     
-    xvm += -fx_m*dt/Mm
-    yvm += -fy_m*dt/Mm
-    zvm += -fz_m*dt/Mm
+    xvm += fx_m*dt/Mm
+    yvm += fy_m*dt/Mm
+    zvm += fz_m*dt/Mm
     
     # update position
     xm += xvm*dt
-    ym += yvm*dt 
+    ym += yvm*dt
     zm += zvm*dt
     
     # add to list
@@ -90,15 +91,15 @@ while t<5*600*daysec:
     
     ################ comet ##############
     # compute G force on comet
-    rx_c,ry_c,rz_c = xs - xc, ys - yc, zs - zc
+    rx_c,ry_c,rz_c = xc - xs, yc - ys, zc - zs
     modr3_c = (rx_c**2+ry_c**2+rz_c**2)**1.5
     fx_c = -gravconst_c*rx_c/modr3_c
     fy_c = -gravconst_c*ry_c/modr3_c
     fz_c = -gravconst_c*rz_c/modr3_c
     
-    xvc += -fx_c*dt/Mc
-    yvc += -fy_c*dt/Mc
-    zvc += -fz_c*dt/Mc
+    xvc += fx_c*dt/Mc
+    yvc += fy_c*dt/Mc
+    zvc += fz_c*dt/Mc
     
     # update position
     xc += xvc*dt
@@ -112,9 +113,9 @@ while t<5*600*daysec:
     
     ################ the sun ###########
     # update quantities how is this calculated?  F = ma -> a = F/m
-    xvs += (fx_e+fx_m)*dt/Ms
-    yvs += (fy_e+fy_m)*dt/Ms
-    zvs += (fz_e+fz_m)*dt/Ms
+    xvs += -(fx_e+fx_m)*dt/Ms
+    yvs += -(fy_e+fy_m)*dt/Ms
+    zvs += -(fz_e+fz_m)*dt/Ms
     
     # update position
     xs += xvs*dt
